@@ -1,34 +1,63 @@
 {
   "project_info": {
-    "project_number": "403422425679",
-    "firebase_url": "https://studentcoursehelper.firebaseio.com",
-    "project_id": "studentcoursehelper",
-    "storage_bucket": "studentcoursehelper.appspot.com"
+    "project_number": "927262244973",
+    "firebase_url": "https://studentcoursehelper-b5cbd.firebaseio.com",
+    "project_id": "studentcoursehelper-b5cbd",
+    "storage_bucket": "studentcoursehelper-b5cbd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:403422425679:android:5f33132aad163a28ceb03a",
+        "mobilesdk_app_id": "1:927262244973:android:8d24e70ad0de88f6c77f64",
         "android_client_info": {
-          "package_name": "com.studentcoursehelper.group59"
+          "package_name": "com.comp90018_assignment2_master"
         }
       },
       "oauth_client": [
         {
-          "client_id": "403422425679-duur0l2qq0n7th1c1hg9oc9r2is64adq.apps.googleusercontent.com",
+          "client_id": "927262244973-rkssgkrbbcp3ec2agpl3pq5he087tu46.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA3dODi6BIB-f87sJdapR5qN9ioXjx7kKU"
+          "current_key": "AIzaSyDN_bK_2YQjsH7R-LwxqJPn3A76faJGA3I"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "403422425679-duur0l2qq0n7th1c1hg9oc9r2is64adq.apps.googleusercontent.com",
+              "client_id": "927262244973-rkssgkrbbcp3ec2agpl3pq5he087tu46.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927262244973:android:08524e5fe0de5a86c77f64",
+        "android_client_info": {
+          "package_name": "com.group59.studentCourseHelper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927262244973-rkssgkrbbcp3ec2agpl3pq5he087tu46.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN_bK_2YQjsH7R-LwxqJPn3A76faJGA3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927262244973-rkssgkrbbcp3ec2agpl3pq5he087tu46.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
