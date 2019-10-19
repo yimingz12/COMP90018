@@ -9,7 +9,7 @@
     <item
         android:id="@+id/navigation_award"
         android:icon="@drawable/award"
-        android:title="Award" />
+        android:title="My Questions" />
 
     <item
         android:id="@+id/navigation_search"
