@@ -13,6 +13,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,23 +24,65 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.group59.studentCourseHelper.R;
 import com.group59.studentCourseHelper.data.Home;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.group59.studentCourseHelper.data.ui.register.RegisterActivity;
+
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginViewModel loginViewModel;
+    //private LoginViewModel loginViewModel;
+
+    EditText email, password;
+    Button login, register;
+    private FirebaseAuth mAuth;
+    ProgressBar loadingProgressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        email = findViewById(R.id.et_email);
+        password = findViewById(R.id.et_password);
+        login = findViewById(R.id.b_login);
+        register = findViewById(R.id.b_register);
+        loadingProgressBar = findViewById(R.id.loading);
+
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginEvent();
+            }
+        });
+
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
+/*
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
+        final EditText usernameEditText = findViewById(R.id.et_email);
+        final EditText passwordEditText = findViewById(R.id.et_password);
+        final Button loginButton = findViewById(R.id.b_login);
+        final Button registerButton = findViewById(R.id.b_register);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -72,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                     updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
+
 
                 //Complete and destroy login activity once successful
                 finish();
@@ -112,17 +156,84 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
 
-                Intent intent = new Intent(LoginActivity.this, Home.class);
-                startActivity(intent);
 
             }
         });
+
+*/
+
     }
 
+    private boolean validateForm() {
+        final boolean[] valid = {true};
+
+        String v_email = email.getText().toString();
+        if (TextUtils.isEmpty(v_email)) {
+            email.setError("The email shouldn't be empty");
+            valid[0] = false;
+        }
+        else if (!v_email.contains("@")) {
+            email.setError("invalid format");
+            valid[0] = false;
+              }
+        else if (!v_email.contains(".com")) {
+            email.setError("invalid format");
+            valid[0] = false;
+        }
+        else
+        {
+            email.setError(null);
+        }
+
+        String v_password = password.getText().toString();
+        if (TextUtils.isEmpty(v_password)) {
+            password.setError("Required a password");
+            valid[0] = false;
+        }
+        else if (password.length() < 6) {
+            password.setError("password must be at least 6 characters long");
+            valid[0] = false;
+        }
+        else {
+            password.setError(null);
+        }
+
+
+
+        return valid[0];
+    }
+
+    private void loginEvent() {
+            if (!validateForm()) {
+                return;
+             }
+
+            loadingProgressBar.setVisibility(View.VISIBLE);
+            mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+
+                                startActivity(new Intent(LoginActivity.this, Home.class));
+                                finish();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Login fail", Toast.LENGTH_SHORT).show();
+                            }
+                            loadingProgressBar.setVisibility(View.GONE);
+                        }
+                    });
+
+        }
+
+
+
+/*
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
@@ -132,4 +243,9 @@ public class LoginActivity extends AppCompatActivity {
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
+
+
+ */
+
+
 }

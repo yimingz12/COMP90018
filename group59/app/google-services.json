@@ -44,6 +44,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "927262244973-gh4u3d4o6c5el3d5eqfefv95bfgqkhhr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.group59.studentCourseHelper",
+            "certificate_hash": "818aa94ef1cb28467dc5f8f94711ec94b432c3c6"
+          }
+        },
+        {
           "client_id": "927262244973-rkssgkrbbcp3ec2agpl3pq5he087tu46.apps.googleusercontent.com",
           "client_type": 3
         }

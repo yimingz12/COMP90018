@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.group59.studentCourseHelper">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,9 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".data.ui.register.RegisterActivity"
+            android:parentActivityName=".data.ui.login.LoginActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".data.ui.login.LoginActivity" />
+        </activity>
         <activity
             android:name=".data.Home"
-            android:label="@string/title_activity_home"></activity>
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".data.ui.login.LoginActivity"
             android:label="@string/app_name">
