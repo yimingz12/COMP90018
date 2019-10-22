@@ -25,55 +25,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/post_question"
-            android:layout_width="match_parent"
-            android:layout_height="411dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            tools:context=".data.ui.search.SearchFragment"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="166dp">
 
-            <EditText
-                android:layout_marginTop="10dp"
-                android:id="@+id/ques_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="title:"
-                android:inputType="textPersonName"
-                tools:layout_editor_absoluteX="99dp"
-                tools:layout_editor_absoluteY="343dp" />
-
-            <EditText
-                android:id="@+id/ques_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="description:"
-                android:inputType="textMultiLine"
-                tools:layout_editor_absoluteX="99dp"
-                tools:layout_editor_absoluteY="402dp" />
-            <EditText
-                android:layout_marginTop="10dp"
-                android:id="@+id/ques_tag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Subject Code: e.g. COMP90018" />
-            <Button
-                android:id="@+id/ques_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                tools:layout_editor_absoluteX="161dp"
-                tools:layout_editor_absoluteY="476dp" />
+        <Button
+            android:id="@+id/post_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:text="Add a new question" />
 
 
-        </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

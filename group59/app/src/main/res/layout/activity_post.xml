@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        tools:context=".data.ui.post.PostActivity">
+
+        <TextView
+            android:id="@+id/text_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/post_question"
+            android:layout_width="match_parent"
+            android:layout_height="411dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:context=".data.ui.search.SearchFragment"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="166dp">
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/ques_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="title:"
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="99dp"
+                tools:layout_editor_absoluteY="343dp" />
+
+            <EditText
+                android:id="@+id/ques_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="description:"
+                android:inputType="textMultiLine"
+                tools:layout_editor_absoluteX="99dp"
+                tools:layout_editor_absoluteY="402dp" />
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/ques_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Subject Code: e.g. COMP90018" />
+            <Button
+                android:id="@+id/ques_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                tools:layout_editor_absoluteX="161dp"
+                tools:layout_editor_absoluteY="476dp" />
+
+            <Button
+                android:id="@+id/ques_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="go back" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

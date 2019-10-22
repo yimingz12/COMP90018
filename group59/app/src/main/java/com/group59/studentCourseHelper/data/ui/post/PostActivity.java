@@ -2,6 +2,7 @@ package com.group59.studentCourseHelper.data.ui.post;
 
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,6 +27,7 @@ public class PostActivity extends AppCompatActivity {
     EditText desc;
     EditText tag;
     Button  submitButton;
+    Button backButton;
     FirebaseDatabase database;
     DatabaseReference mDB_ref;
     FirebaseAuth mAuth;
@@ -38,21 +40,31 @@ public class PostActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
 
 
-        setContentView(R.layout.fragment_post);
+        setContentView(R.layout.activity_post);
         title=(EditText)findViewById(R.id.ques_title);
         desc=(EditText)findViewById(R.id.ques_desc);
         tag=(EditText)findViewById(R.id.ques_tag) ;
         submitButton=(Button)findViewById(R.id.ques_submit) ;
+        backButton=(Button)findViewById(R.id.ques_back);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            addques();
+               if( addques()){
+                  finish();
+               };
 
+            }
+
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
     }
-    private void addques(){
+    private boolean addques(){
         String m_title=title.getText().toString().trim();
         String m_desc=desc.getText().toString().trim();
         String m_tag=tag.getText().toString().trim();
@@ -63,6 +75,7 @@ public class PostActivity extends AppCompatActivity {
                 Question newques= new Question(id,m_title,m_desc,m_tag,mAuth.getUid());
                 mDB_ref.child(mAuth.getUid()).child(id).setValue(newques);
                 Toast.makeText(this,"You have posted a question succefully",Toast.LENGTH_LONG).show();
+                return true;
             }else{
                 Toast.makeText(this,"You should write a title",Toast.LENGTH_LONG).show();
             }
@@ -70,7 +83,7 @@ public class PostActivity extends AppCompatActivity {
             Toast.makeText(this,"You should write a legal subject code",Toast.LENGTH_LONG).show();
         }
 
-
+        return false;
     }
     private boolean parsetag(String tag){
         String pattern="^([a-z]|[A-Z]){4}[0-9]{5}$";
