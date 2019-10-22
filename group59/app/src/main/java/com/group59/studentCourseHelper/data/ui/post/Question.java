@@ -4,14 +4,14 @@ public class Question {
    private String questionId;
     private String quesionTitle;
     private String questionDesc;
-    private String senderName;
+    private String senderID;
     public Question(){}
 
-    public Question(String questionId, String quesionTitle, String questionDesc, String senderMail) {
+    public Question(String questionId, String quesionTitle, String questionDesc, String senderID) {
         this.questionId = questionId;
         this.quesionTitle = quesionTitle;
         this.questionDesc = questionDesc;
-        this.senderName = senderMail;
+        this.senderID = senderID;
     }
 
     public String getQuestionId() {
@@ -27,6 +27,6 @@ public class Question {
     }
 
     public String getSenderMail() {
-        return senderName;
+        return senderID;
     }
 }

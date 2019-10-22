@@ -12,6 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".data.ui.post.PostActivity"
+                android:value=".data.ui.post.PostActivity">
+
+        </activity>
         <activity android:name=".data.ui.register.RegisterActivity"
             android:parentActivityName=".data.ui.login.LoginActivity">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
