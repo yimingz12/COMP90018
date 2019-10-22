@@ -29,11 +29,10 @@ public class PostFragment extends Fragment {
                 ViewModelProviders.of(this).get(PostViewModel.class);
         View root = inflater.inflate(R.layout.fragment_post, container, false);
 
-        m_button=(Button)root.findViewById(R.id.question_submit);
+        m_button=(Button)root.findViewById(R.id.ques_submit);
         m_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Log.i("post","activate activity");
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), PostActivity.class);
                 startActivity(intent);
