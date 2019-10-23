@@ -29,7 +29,7 @@ public class AwardFragment extends Fragment {
     private String TAG = getClass().getName();
     private ListView listView;
     private TextView title, time, tag;
-    List<Listmy> mylist;
+//    List<Listmy> mylist;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     DatabaseReference myRef = database.getReference("users");
@@ -58,7 +58,7 @@ public class AwardFragment extends Fragment {
                     final String title1 = postSnapshot.child("title").getValue().toString();
                     final String time1 = postSnapshot.child("tag").getValue().toString();
                     final String tag1 = postSnapshot.child("time").getValue().toString();
-                    mylist.add(new Listmy(title1,time1,tag1));
+//                    mylist.add(new Listmy(title1,time1,tag1));
                 }
             }
 
@@ -68,24 +68,24 @@ public class AwardFragment extends Fragment {
             }
         });
 
-        final ListAdapter adapter = new ListAdapter(getContext(), R.layout.myquestion_list, mylist
-        );
-        listView = getView().findViewById(R.id.myquestion_list);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Listmy list = (Listmy) adapterView.getItemAtPosition(i);
-                Toast.makeText(getContext(), list.getTitle(), Toast.LENGTH_SHORT).show();
-                Log.i(TAG, "onClick::" + list.getTitle());
-
-                Intent intent = new Intent();
-                intent.setAction("AWARD");
-                intent.putExtra("title", list.getTitle());
-                startActivity(intent);
-            }
-        });
-
+//        final ListAdapter adapter = new ListAdapter(getContext(), R.layout.myquestion_list, mylist
+//        );
+//        listView = getView().findViewById(R.id.myquestion_list);
+//        listView.setAdapter(adapter);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Listmy list = (Listmy) adapterView.getItemAtPosition(i);
+//                Toast.makeText(getContext(), list.getTitle(), Toast.LENGTH_SHORT).show();
+//                Log.i(TAG, "onClick::" + list.getTitle());
+//
+//                Intent intent = new Intent();
+//                intent.setAction("AWARD");
+//                intent.putExtra("title", list.getTitle());
+//                startActivity(intent);
+//            }
+//        });
+//
 
     }
 }

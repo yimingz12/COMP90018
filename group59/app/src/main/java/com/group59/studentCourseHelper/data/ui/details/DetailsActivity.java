@@ -1,4 +1,4 @@
-package com.group59.studentCourseHelper.data.ui.answer;
+package com.group59.studentCourseHelper.data.ui.details;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,36 +9,35 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.group59.studentCourseHelper.R;
 import com.group59.studentCourseHelper.data.ui.post.Question;
 
-public class AnswerActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity {
     //TextView answer;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     Button ans_submit;
     Button ans_back;
-    EditText answer;
-    DatabaseReference myRef = database.getReference("answers");
+    TextView title, name, des;
+    DatabaseReference myRef = database.getReference("questions");
     private String TAG = getClass().getName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_answer);
-        answer = findViewById(R.id.answ);
-        ans_back=(Button)findViewById(R.id.ans_back);
-        ans_submit=(Button)findViewById(R.id.ans_submit);
-        ans_submit.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-               if( addans()){
-                   finish();
-               }
-            }
-        });
+        setContentView(R.layout.activity_details);
+
+        ans_back=(Button)findViewById(R.id.back_btn);
+        ans_submit=(Button)findViewById(R.id.ans_btn);
+        title = findViewById(R.id.detail_title);
+        name = findViewById(R.id.detail_name);
+        des = findViewById(R.id.detail_des);
         ans_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,22 +47,22 @@ public class AnswerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String a = intent.getStringExtra("title");
-        Log.i(TAG, "onCreateView: :"+a);
-        answer.setText(a);
+//        answer.setText(a);
         showView(a);
 
     }
 
     private void showView(String a) {
+        myRef.child(a).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-    }
-    private boolean addans(){
-    String m_answer=answer.getText().toString().trim();
-        String id= myRef.push().getKey();
-        Answer m_ans=new Answer(m_answer);
-        myRef.child(id).setValue(m_ans);
-        Toast.makeText(this,"You have posted an answer succefully",Toast.LENGTH_LONG).show();
-        return true;
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

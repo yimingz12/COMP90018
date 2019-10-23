@@ -20,9 +20,23 @@ public class Search {
         this.content = content;
     }
 
-    public Search(String title, String content) {
+    public String getQid() {
+        return qid;
+    }
+
+    public void setQid(String qid) {
+        this.qid = qid;
+    }
+
+    private  String qid;
+
+    public Search(String title, String content, String qid) {
         this.title = title;
         this.content = content;
+        this.qid = qid;
     }
+
+
+
 
 }

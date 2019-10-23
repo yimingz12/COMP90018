@@ -91,10 +91,10 @@ public class Home extends AppCompatActivity {
                     reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String a=dataSnapshot.child("name").getValue(String.class);
-                            Log.i("tag","This is the name");
-                            Log.i("Tag",a);
-                            Home.name=a;
+//                            String a=dataSnapshot.child("name").getValue(String.class);
+//                            Log.i("tag","This is the name");
+//                            Log.i("Tag",a);
+//                            Home.name=a;
                         }
 
                         @Override

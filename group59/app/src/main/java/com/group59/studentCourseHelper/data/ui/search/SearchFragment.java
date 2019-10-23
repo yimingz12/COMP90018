@@ -39,7 +39,7 @@ public class SearchFragment extends Fragment {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    DatabaseReference myRef = database.getReference("users");
+    DatabaseReference myRef = database.getReference("questions");
     List<Search> searchList;
 
     private  ListView listView;
@@ -79,22 +79,23 @@ public class SearchFragment extends Fragment {
    public void Event(){
         searchList = new ArrayList();
        final String input = InputSearch.getText().toString();
-       myRef.orderByChild("email").addValueEventListener(new ValueEventListener() {
+       myRef.orderByChild("questionTitle").addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                   final String title = postSnapshot.child(("email")).getValue().toString();
-                   final String psw = postSnapshot.child("password").getValue().toString();
+                   final String title = postSnapshot.child(("questionTitle")).getValue().toString();
+                   final String tag = postSnapshot.child("tag").getValue().toString();
+                   final String qid = postSnapshot.child("questionId").getValue().toString();
                    char[] c = input.toCharArray();
                    int j = 0;
                    for(char cc:c) {
-                       if (psw.indexOf(cc)>-1) {
+                       if (title.indexOf(cc)>-1||tag.indexOf(cc)>-1) {
                            j = 1;
                        }
                    }
                    Log.i(TAG, "onSearch::" +j);
                    if (j == 1){
-                       searchList.add(new Search(title, psw));
+                       searchList.add(new Search(title, tag,qid));
                    }
                }
            }
@@ -115,8 +116,8 @@ public class SearchFragment extends Fragment {
                Log.i(TAG, "onClick::" +search.getTitle());
 
                Intent intent = new Intent();
-               intent.setAction("AWARD");
-               intent.putExtra("title",search.getTitle());
+               intent.setAction("android.intent.action.ANSWER");
+               intent.putExtra("qid",search.getQid());
                startActivity(intent);
            }
        });
