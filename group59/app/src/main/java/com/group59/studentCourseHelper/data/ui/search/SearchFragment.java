@@ -89,8 +89,6 @@ public class SearchFragment extends Fragment {
                    int j = 0;
                    for(char cc:c) {
                        if (psw.indexOf(cc)>-1) {
-                           Log.i(TAG, "onSearch:title:"+ title);
-                           Log.i(TAG, "onSearch:psw:"+ psw);
                            j = 1;
                        }
                    }

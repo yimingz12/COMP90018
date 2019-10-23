@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.group59.studentCourseHelper.R;
 import com.group59.studentCourseHelper.data.ui.post.Question;
 
-public class answerActivity extends AppCompatActivity {
+public class AnswerActivity extends AppCompatActivity {
     //TextView answer;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     Button ans_submit;
@@ -28,7 +28,7 @@ public class answerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
-        answer = findViewById(R.id.anws);
+        answer = findViewById(R.id.answ);
         ans_back=(Button)findViewById(R.id.ans_back);
         ans_submit=(Button)findViewById(R.id.ans_submit);
         ans_submit.setOnClickListener(new View.OnClickListener(){

@@ -22,7 +22,7 @@
             tools:layout_editor_absoluteY="166dp">
 
             <EditText
-                android:id="@+id/anws"
+                android:id="@+id/answ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
