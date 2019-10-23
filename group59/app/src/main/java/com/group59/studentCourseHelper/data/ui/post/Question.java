@@ -8,7 +8,7 @@ public class Question {
     private String questionDesc;
     private String senderID;
     private String tag;
-    private String tste;
+
 
     public String getSenderName() {
         return senderName;

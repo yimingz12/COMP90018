@@ -45,7 +45,7 @@ public class PostActivity extends AppCompatActivity {
         mDB_ref=database.getReference("questions");
         mDB_user=database.getReference("users");
         mAuth=FirebaseAuth.getInstance();
-        mDB_user=mDB_user.child(mAuth.getUid());
+        mDB_user=mDB_user.child(mAuth.getCurrentUser().getUid());
         mDB_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
