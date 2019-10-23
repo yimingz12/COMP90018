@@ -9,14 +9,21 @@ public class Question {
     private String senderID;
     private String tag;
 
+    public String getSenderName() {
+        return senderName;
+    }
+
+    private String senderName;
+
     public Question(){}
 
-    public Question(String questionId, String quesionTitle, String questionDesc,String tag, String senderID) {
+    public Question(String questionId, String quesionTitle, String questionDesc,String tag, String senderName,String senderID) {
         this.questionId = questionId;
         this.quesionTitle = quesionTitle;
         this.questionDesc = questionDesc;
         this.senderID = senderID;
         this.tag = tag;
+        this.senderName=senderName;
     }
 
     public String getQuestionId() {
