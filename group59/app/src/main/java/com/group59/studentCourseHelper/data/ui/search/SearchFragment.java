@@ -33,7 +33,7 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
-    private SearchViewModel notificationsViewModel;
+    //private SearchViewModel notificationsViewModel;
 
     EditText InputSearch;
 
@@ -49,19 +49,19 @@ public class SearchFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(SearchViewModel.class);
+        //notificationsViewModel =
+        //        ViewModelProviders.of(this).get(SearchViewModel.class);
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        textView = view.findViewById(R.id.text_search);
+        //textView = view.findViewById(R.id.text_search);
         searchList = new ArrayList();
         InputSearch = view.findViewById(R.id.search_input);
-
+/*
         notificationsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
+        });*/
         Button btn = (Button) view.findViewById(R.id.search_btn);
 
 

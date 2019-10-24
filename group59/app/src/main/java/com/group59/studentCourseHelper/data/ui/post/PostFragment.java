@@ -20,12 +20,12 @@ import com.group59.studentCourseHelper.R;
 
 public class PostFragment extends Fragment {
 
-    private PostViewModel notificationsViewModel;
+    //private PostViewModel notificationsViewModel;
     LinearLayout m_layout;
     Button m_button;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
+        //notificationsViewModel =
                 ViewModelProviders.of(this).get(PostViewModel.class);
         View root = inflater.inflate(R.layout.fragment_post, container, false);
 
@@ -40,12 +40,12 @@ public class PostFragment extends Fragment {
 
         });
         final TextView textView = root.findViewById(R.id.text_post);
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
+        /*notificationsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
+        });*/
         return root;
     }
 }
