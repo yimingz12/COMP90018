@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText email,name,password;
     ImageView profile;
     Button submit;
-
+    Uri imageUri;
     ProgressBar loadingProgressBar;
 
     @Override
@@ -52,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         email=findViewById(R.id.et_email);
         password=findViewById(R.id.et_password);
         name=findViewById(R.id.et_name);
-
+        profile=findViewById(R.id.iv_profile);
         submit=findViewById(R.id.b_register);
         loadingProgressBar = findViewById(R.id.loading);
 
@@ -64,17 +64,21 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-
-
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                upload();
+            }
+        });
 
     }
-/*
+
     private void upload() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent, 10);
     }
-*/
+
     private boolean validateForm() {
         final boolean[] valid = {true};
 
@@ -95,8 +99,8 @@ public class RegisterActivity extends AppCompatActivity {
             email.setError("invalid format");
             valid[0] = false;
         }
-       // else if (isExistUserName(v_email)){
-       //     email.setError("This name is exist");
+        // else if (isExistUserName(v_email)){
+        //     email.setError("This name is exist");
         //    valid[0] = false;
         //}
         else
@@ -159,24 +163,22 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
 
-   /*
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(); //Getting root reference
-        myRef.child("users").orderByChild("email").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(String.class) == null) {
-                    //username doesn't exist
-                    //do something
-                   // Toast.makeText(RegisterActivity.this, "username Exists", Toast.LENGTH_LONG).show();
-
-
-                } else {
-                    //username exist
-                    //do something
-                    has_userName[0] = true;
-                }
-            }
-*/
+            /*
+                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(); //Getting root reference
+                 myRef.child("users").orderByChild("email").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(DataSnapshot dataSnapshot) {
+                         if (dataSnapshot.getValue(String.class) == null) {
+                             //username doesn't exist
+                             //do something
+                            // Toast.makeText(RegisterActivity.this, "username Exists", Toast.LENGTH_LONG).show();
+                         } else {
+                             //username exist
+                             //do something
+                             has_userName[0] = true;
+                         }
+                     }
+         */
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -188,7 +190,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void signup() {
 
         if (!validateForm()) {
-        return;
+            return;
         }
 
         loadingProgressBar.setVisibility(View.VISIBLE);
@@ -197,65 +199,41 @@ public class RegisterActivity extends AppCompatActivity {
                 .createUserWithEmailAndPassword(email.getText().toString(),
                         password.getText().toString())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if (task.isSuccessful()){
+                        if (task.isSuccessful()){
 
-                    final String uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    //final String uid=task.getResult().getUser().getUid();
-                    final StorageReference storageReference= FirebaseStorage.getInstance().getReference().child("users").child(uid);
-
-  //                  storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        //@Override
-  //                      public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-
- //                           if (task.isSuccessful()){
-
-                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-
-                                        //String imageurl=uri.toString();
-
-                                        String m_name=name.getText().toString().trim();
-                                        String m_email=email.getText().toString().trim();
-                                        String m_password=password.getText().toString().trim();
-                                        String id=  FirebaseDatabase.getInstance().getReference().child("users").push().getKey();
-                                        UserModel userModel=new UserModel(m_name,m_email,m_password,id);
-
-                                        //userModel.imageurl=imageurl;
-
-                                        FirebaseDatabase.getInstance().getReference().child("users").child(id).setValue(userModel);
+                            final String uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            //final String uid=task.getResult().getUser().getUid();
+                            final StorageReference storageReference= FirebaseStorage.getInstance().getReference().child("users").child(uid);
+                            String m_name=name.getText().toString();
+                            String m_email=email.getText().toString();
+                            String m_password=password.getText().toString();
+                            UserModel userModel=new UserModel(m_name,m_email,m_password,uid);
 
 
-                                        Intent intent = new Intent(RegisterActivity.this,Home.class);
-                                        intent.putExtra("key",userModel.getUserName());   // String
-
-                                        startActivity(intent);
-                                        finish();
-
-                                    }
-                                });
+                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
 
 
-                          //  }else{
-                      //          Toast.makeText(RegisterActivity.this,"error",Toast.LENGTH_SHORT).show();
-                  //          }
-               //         }
-              //      });
+                            Intent intent = new Intent(RegisterActivity.this,Home.class);
 
-                }else{
 
-        //            Toast.makeText(RegisterActivity.this,"error",Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                            finish();
 
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-            }
-        });
+
+                        }else{
+
+                            Toast.makeText(RegisterActivity.this,"error",Toast.LENGTH_SHORT).show();
+
+                        }
+                        loadingProgressBar.setVisibility(View.GONE);
+                    }
+                });
 
     }
-/*
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -264,6 +242,4 @@ public class RegisterActivity extends AppCompatActivity {
             imageUri = data.getData();
         }
     }
-
- */
 }

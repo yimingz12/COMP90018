@@ -7,39 +7,25 @@ public class UserModel {
         private String password;
         private String email;
         private String uid;
-        //public int pwdresetFlag=0;
 
-        public String getUserName() {
+        public String getName() {
                 return name;
         }
-        public void setUserName(String name) {
-                this.name = name;
-        }
 
-        public String getUserPwd() {
-                return password;
-        }
-        public void setUserPwd(String password) {
-                this.password = password;
-        }
-
-        public String getUserId() {
+        public String getEmail() {
                 return email;
         }
-        public void setUserId(String email) {
-                this.email = email;
+
+        public String getPassword() {
+                return password;
         }
 
 
-        public String getUID() {
+        public String getUid() {
                 return uid;
         }
-        public void setUID(String uid) {
-                this.uid = uid;
-        }
 
-
-        public UserModel(String name, String password, String email,  String uid) {
+        public UserModel(String name, String email, String password, String uid) {
 
                 this.name = name;
                 this.password = password;
