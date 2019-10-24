@@ -15,6 +15,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.group59.studentCourseHelper.R;
 import com.group59.studentCourseHelper.data.Home;
 import com.group59.studentCourseHelper.data.ui.login.LoginActivity;
@@ -22,9 +27,11 @@ import com.group59.studentCourseHelper.data.ui.login.LoginActivity;
 public class HomeFragment extends Fragment {
 
     //private HomeViewModel homeViewModel;
-
+    String email;
+    String name;
     private Button quit;
     private FirebaseAuth mAuth;
+    DatabaseReference mDB_user;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         //homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -37,6 +44,20 @@ public class HomeFragment extends Fragment {
         //    }
         //});
         mAuth = FirebaseAuth.getInstance();
+       email= mAuth.getCurrentUser().getEmail();
+       mDB_user=FirebaseDatabase.getInstance().getReference("users").child(mAuth.getCurrentUser().getUid());
+        mDB_user.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String a=dataSnapshot.child("name").getValue(String.class);
+                name=a;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         quit = root.findViewById(R.id.b_signout);
         return root;
         /*
