@@ -2,6 +2,7 @@ package com.group59.studentCourseHelper.data.ui.search;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,8 @@ import com.group59.studentCourseHelper.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.graphics.Color.WHITE;
 
 
 public class SearchFragment extends Fragment {
@@ -91,6 +94,8 @@ public class SearchFragment extends Fragment {
                     final String qid = postSnapshot.child("questionId").getValue().toString();
                     char[] c = input.toCharArray();
                     int j = 0;
+                    image.setVisibility(View.GONE);
+
                     for (char cc : c) {
                         if (title.indexOf(cc) > -1 || tag.indexOf(cc) > -1) {
                             j = 1;
@@ -110,6 +115,7 @@ public class SearchFragment extends Fragment {
         });
         final SearchAdapter adapter = new SearchAdapter(getContext(), R.layout.search_list, searchList);
         listView = getView().findViewById(R.id.search_list);
+        listView.setBackgroundColor(Color.parseColor("#FFFFFF"));
         image = getView().findViewById(R.id.imageView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -118,7 +124,6 @@ public class SearchFragment extends Fragment {
                 Search search = (Search) adapterView.getItemAtPosition(i);
                 Toast.makeText(getContext(), search.getTitle(), Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "onClick::" + search.getTitle());
-                image.setVisibility(View.GONE);
 
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.DETAILS");
