@@ -1,11 +1,18 @@
 package com.group59.studentCourseHelper.data.ui.details;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.group59.studentCourseHelper.R;
 import com.group59.studentCourseHelper.data.ui.post.Question;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements SensorEventListener {
     //TextView answer;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     Button ans_submit;
@@ -28,6 +35,13 @@ public class DetailsActivity extends AppCompatActivity {
     TextView title, name, des;
     DatabaseReference myRef = database.getReference("questions");
     private String TAG = getClass().getName();
+    private SensorManager sm;
+    private Sensor mSensorOrientation;
+    private final Handler mHandler = new Handler();
+    private double x;
+    private double y;
+    private double z;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +71,10 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        x=0;
+        y=0;
+        z=0;
+        iniHolder();
     }
 
     private void showView(String a) {
@@ -74,5 +91,52 @@ public class DetailsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        Holder.scroll.post(ScrollRunnable);
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+    private void iniHolder() {
+        Holder.scroll = (ScrollView) findViewById(R.id.sv_scroll);
+        Holder.mlayout = (LinearLayout) findViewById(R.id.l_test);
+        Holder.tv_null = (TextView) findViewById(R.id.detail_des);
+        Holder.tv_null.setHeight(getWindowManager().getDefaultDisplay().getHeight() - 50);
+
+
+    }
+    private Runnable ScrollRunnable = new Runnable() {
+        @Override
+        public void run() {
+            int off = Holder.mlayout.getMeasuredHeight()
+                    - Holder.scroll.getHeight();// 判断高度,ScrollView的最大高度，就是屏幕的高度
+            if ((off > 0) && (x<1) && (y<10) && (z<2) && (x>-1) && (y>0) && (z>-5)) {
+                Holder.scroll.scrollBy(0, 2);
+                if (Holder.scroll.getScrollY() == off) {
+                    Thread.currentThread().interrupt();
+                } else {
+                    mHandler.postDelayed(this, 10);
+                }
+            }
+            if ((off > 0) && (x<1) && (y<4) && (z<10) && (x>-1) && (y>0) && (z>8)) {
+                Holder.scroll.scrollBy(0, -2);
+                if (Holder.scroll.getScrollY() == off) {
+                    Thread.currentThread().interrupt();
+                } else {
+                    mHandler.postDelayed(this, 10);
+                }
+            }
+        }
+    };
+    static class Holder {
+        static ScrollView scroll;
+        static LinearLayout mlayout;
+        static TextView tv_null;
     }
 }

@@ -8,12 +8,16 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="552dp">
+        android:layout_height="552dp"
+        android:id="@+id/sv_scroll"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/l_test"
+            >
 
             <TextView
                 android:id="@+id/detail_name"
