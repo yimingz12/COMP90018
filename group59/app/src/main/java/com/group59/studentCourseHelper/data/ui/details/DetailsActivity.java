@@ -95,6 +95,9 @@ public class DetailsActivity extends AppCompatActivity implements SensorEventLis
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        x=(float) (Math.round(event.values[0] * 100)) / 100;
+        y=(float) (Math.round(event.values[1] * 100)) / 100;
+        z=(float) (Math.round(event.values[2] * 100)) / 100;
         Holder.scroll.post(ScrollRunnable);
 
     }

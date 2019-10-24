@@ -36,7 +36,8 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         //homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        //final TextView textView = root.findViewById(R.id.text_home);
+        final TextView textView = root.findViewById(R.id.name);
+        final TextView textView1 = root.findViewById(R.id.email);
         //homeViewModel.getText().observe(this, new Observer<String>() {
         // @Override
         //   public void onChanged(@Nullable String s) {
@@ -45,12 +46,14 @@ public class HomeFragment extends Fragment {
         //});
         mAuth = FirebaseAuth.getInstance();
        email= mAuth.getCurrentUser().getEmail();
+        textView1.setText(email);
        mDB_user=FirebaseDatabase.getInstance().getReference("users").child(mAuth.getCurrentUser().getUid());
         mDB_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String a=dataSnapshot.child("name").getValue(String.class);
                 name=a;
+                textView.setText(name);
             }
 
             @Override

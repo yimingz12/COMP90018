@@ -8,10 +8,17 @@
     android:gravity="center_horizontal"
     tools:context=".data.ui.login.LoginActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="121dp"
+        android:layout_height="106dp"
+        app:srcCompat="@drawable/logo"
+        android:layout_marginTop="50dp"/>
+
     <EditText
         android:id="@+id/et_email"
         android:hint="User Email"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:inputType="textEmailAddress"
@@ -65,4 +72,5 @@
         app:layout_constraintStart_toStartOf="@+id/et_password"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
+
 </LinearLayout>
