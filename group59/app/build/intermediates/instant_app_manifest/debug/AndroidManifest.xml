@@ -29,10 +29,16 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.group59.studentCourseHelper.data.AppIntroActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.group59.studentCourseHelper.data.ui.post.PostActivity"
-            android:value=".data.ui.post.PostActivity" >
-        </activity>
+            android:value=".data.ui.post.PostActivity" />
         <activity
             android:name="com.group59.studentCourseHelper.data.ui.register.RegisterActivity"
             android:parentActivityName="com.group59.studentCourseHelper.data.ui.login.LoginActivity" >
@@ -51,7 +57,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
