@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.group59.studentCourseHelper.R;
 import com.group59.studentCourseHelper.data.Home;
 import com.group59.studentCourseHelper.data.ui.login.LoginActivity;
+import com.group59.studentCourseHelper.data.ui.post.PostActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -46,7 +47,7 @@ public class HomeFragment extends Fragment {
         //});
         mAuth = FirebaseAuth.getInstance();
        email= mAuth.getCurrentUser().getEmail();
-        textView1.setText(email);
+
        mDB_user=FirebaseDatabase.getInstance().getReference("users").child(mAuth.getCurrentUser().getUid());
         mDB_user.addValueEventListener(new ValueEventListener() {
             @Override
@@ -54,6 +55,7 @@ public class HomeFragment extends Fragment {
                 String a=dataSnapshot.child("name").getValue(String.class);
                 name=a;
                 textView.setText(name);
+                textView1.setText(email);
             }
 
             @Override
@@ -61,23 +63,24 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        //quit = root.findViewById(R.id.b_signout);
-        return root;
-/*
+        quit = root.findViewById(R.id.b_signout);
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 signOut();
-
             }
-        });*/
+        });
+        return root;
+
+
     }
 
 
     private void signOut() {
         mAuth.signOut();
-        //updateUI(null);
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), LoginActivity.class);
+        startActivity(intent);
     }
 
 

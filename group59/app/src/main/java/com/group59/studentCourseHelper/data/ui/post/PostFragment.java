@@ -20,13 +20,13 @@ import com.group59.studentCourseHelper.R;
 
 public class PostFragment extends Fragment {
 
-    //private PostViewModel notificationsViewModel;
+    private PostViewModel notificationsViewModel;
     LinearLayout m_layout;
     Button m_button;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        //notificationsViewModel =
-                ViewModelProviders.of(this).get(PostViewModel.class);
+        notificationsViewModel =
+        ViewModelProviders.of(this).get(PostViewModel.class);
         View root = inflater.inflate(R.layout.fragment_post, container, false);
 
         m_button=(Button)root.findViewById(R.id.post_add);

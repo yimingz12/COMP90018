@@ -13,8 +13,8 @@
 
     <fragment
         android:id="@+id/navigation_award"
-        android:name="com.group59.studentCourseHelper.data.ui.award.AwardFragment"
-        android:label="Award"
+        android:name="com.group59.studentCourseHelper.data.ui.award.awardFragment"
+        android:label="My Questions"
         tools:layout="@layout/fragment_award" />
 
     <fragment

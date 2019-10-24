@@ -32,7 +32,6 @@ import com.group59.studentCourseHelper.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.graphics.Color.WHITE;
 
 
 public class SearchFragment extends Fragment {
@@ -49,7 +48,7 @@ public class SearchFragment extends Fragment {
     private ListView listView;
     private ImageView image;
     TextView textView;
-
+    int j = 0;
     private String TAG = getClass().getName();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -84,16 +83,16 @@ public class SearchFragment extends Fragment {
     public void Event() {
         searchList = new ArrayList();
         final String input = InputSearch.getText().toString();
-        myRef.child("8CMYneZckXOzjUMWQRKEoxDrmTF3").orderByChild("tag").addValueEventListener(new ValueEventListener() {
+        myRef.orderByChild("questionId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Log.i(TAG, "onSearch::" + postSnapshot.child("tag"));
-                    final String title = postSnapshot.child("quesionTitle").getValue().toString();
+                    final String title = postSnapshot.child("questionTitle").getValue().toString();
                     final String tag = postSnapshot.child("tag").getValue().toString();
                     final String qid = postSnapshot.child("questionId").getValue().toString();
                     char[] c = input.toCharArray();
-                    int j = 0;
+                    j = 0;
                     image.setVisibility(View.GONE);
 
                     for (char cc : c) {
@@ -101,10 +100,13 @@ public class SearchFragment extends Fragment {
                             j = 1;
                         }
                     }
-                    Log.i(TAG, "onSearch::" + j);
                     if (j == 1) {
                         searchList.add(new Search(title, tag, qid));
                     }
+                }
+                Log.i(TAG, "onSearch1::" + j);
+                if(j==0){
+                        Toast.makeText(getContext(), "No results", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -113,7 +115,7 @@ public class SearchFragment extends Fragment {
 
             }
         });
-        final SearchAdapter adapter = new SearchAdapter(getContext(), R.layout.search_list, searchList);
+        SearchAdapter adapter = new SearchAdapter(getContext(), R.layout.search_list, searchList);
         listView = getView().findViewById(R.id.search_list);
         listView.setBackgroundColor(Color.parseColor("#FFFFFF"));
         image = getView().findViewById(R.id.imageView);
@@ -123,7 +125,6 @@ public class SearchFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Search search = (Search) adapterView.getItemAtPosition(i);
                 Toast.makeText(getContext(), search.getTitle(), Toast.LENGTH_SHORT).show();
-                Log.i(TAG, "onClick::" + search.getTitle());
 
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.DETAILS");

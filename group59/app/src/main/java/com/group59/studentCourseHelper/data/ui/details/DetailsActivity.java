@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,15 +26,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group59.studentCourseHelper.R;
-import com.group59.studentCourseHelper.data.ui.post.Question;
+//import com.group59.studentCourseHelper.data.ui.post.Question;
 
 public class DetailsActivity extends AppCompatActivity implements SensorEventListener {
     //TextView answer;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     Button ans_submit;
     Button ans_back;
-    TextView title, name, des;
+    TextView title, name, des, answer;
     DatabaseReference myRef = database.getReference("questions");
+    DatabaseReference ansRef = database.getReference("answers");
     private String TAG = getClass().getName();
     private SensorManager sm;
     private Sensor mSensorOrientation;
@@ -52,6 +54,7 @@ public class DetailsActivity extends AppCompatActivity implements SensorEventLis
         title = findViewById(R.id.detail_title);
         name = findViewById(R.id.detail_name);
         des = findViewById(R.id.detail_des);
+        answer = findViewById(R.id.detail_answer);
         ans_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,7 +64,6 @@ public class DetailsActivity extends AppCompatActivity implements SensorEventLis
         Intent intent = getIntent();
         final String a = intent.getStringExtra("qid");
         showView(a);
-        Log.i(TAG, "onShow::"+a);
         ans_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,13 +79,13 @@ public class DetailsActivity extends AppCompatActivity implements SensorEventLis
         iniHolder();
     }
 
-    private void showView(String a) {
-        myRef.child("8CMYneZckXOzjUMWQRKEoxDrmTF3").child(a).addValueEventListener(new ValueEventListener() {
+    private void showView(final String a) {
+        myRef.child(a).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                name.setText(dataSnapshot.child("tag").getValue().toString());
-                title.setText(dataSnapshot.child("quesionTitle").getValue().toString());
-                des.setText(dataSnapshot.child("questionDesc").getValue().toString());
+                name.setText("Couser code: "+dataSnapshot.child("tag").getValue().toString());
+                title.setText("Question title: "+dataSnapshot.child("questionTitle").getValue().toString());
+                des.setText("Question content: "+dataSnapshot.child("questionDesc").getValue().toString());
             }
 
             @Override
@@ -91,6 +93,36 @@ public class DetailsActivity extends AppCompatActivity implements SensorEventLis
 
             }
         });
+        ansRef.orderByChild("questionId").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String b = postSnapshot.child("questionId").getValue().toString();
+                    if(b.equals(a)){
+                        answer.setText("Answer: "+postSnapshot.child("answer").getValue().toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+//        for(int i=0;i<ansRef.getKey();i++)
+//        ansRef.child(a).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                Log.i(TAG, "onShow::"+dataSnapshot.child("answer").getValue().toString());
+////                answer.setText();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 
     @Override

@@ -3,21 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_gravity="center">
 
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="552dp"
         android:id="@+id/sv_scroll"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/l_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/l_test"
-            >
+            android:background="#009688"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/detail_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Question" />
 
             <TextView
                 android:id="@+id/detail_name"
@@ -37,32 +45,36 @@
                 android:layout_height="wrap_content"
                 android:text="des" />
 
+
+                <TextView
+                    android:id="@+id/detail_answer_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Answer" />
+                <TextView
+                    android:id="@+id/detail_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    />
+                <Button
+                    android:id="@+id/ans_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Answer this question" />
+
+                <Button
+                    android:id="@+id/back_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="go back" />
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/post_question"
-        android:layout_width="match_parent"
-        android:layout_height="113dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        tools:context=".data.ui.search.SearchFragment"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="166dp">
 
-        <Button
-            android:id="@+id/ans_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit" />
 
-        <Button
-            android:id="@+id/back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="go back" />
 
-    </LinearLayout>
+
 
     <!--    </ListView>-->
 

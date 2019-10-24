@@ -20,7 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group59.studentCourseHelper.R;
-import com.group59.studentCourseHelper.data.ui.post.Question;
 
 public class AnswerActivity extends AppCompatActivity {
     //TextView answer;
@@ -31,7 +30,7 @@ public class AnswerActivity extends AppCompatActivity {
     String name;
     String qid;
     DatabaseReference myRef = database.getReference("answers");
-    DatabaseReference userRef=database.getReference("users");
+    DatabaseReference userRef = database.getReference("users");
     FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private String TAG = getClass().getName();
     @Override
@@ -85,8 +84,8 @@ public class AnswerActivity extends AppCompatActivity {
         String m_answer=answer.getText().toString().trim();
         String aid= myRef.push().getKey();
 
-        Answer m_ans=new Answer(m_answer,aid,qid,name);
-        myRef.child(qid).child(aid).setValue(m_ans);
+        Answer m_ans=new Answer(m_answer,aid,qid,mAuth.getCurrentUser().getUid(),name);
+        myRef.child(aid).setValue(m_ans);
         Toast.makeText(this,"You have posted an answer succefully",Toast.LENGTH_LONG).show();
         return true;
 
