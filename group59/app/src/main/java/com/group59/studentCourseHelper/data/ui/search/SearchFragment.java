@@ -79,12 +79,11 @@ public class SearchFragment extends Fragment {
    public void Event(){
         searchList = new ArrayList();
        final String input = InputSearch.getText().toString();
-       myRef.child("8CMYneZckXOzjUMWQRKEoxDrmTF3").orderByChild("tag").addValueEventListener(new ValueEventListener() {
+       myRef.orderByChild("questionTitle").addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                   Log.i(TAG, "onSearch::" +postSnapshot.child("tag"));
-                   final String title = postSnapshot.child("quesionTitle").getValue().toString();
+                   final String title = postSnapshot.child(("questionTitle")).getValue().toString();
                    final String tag = postSnapshot.child("tag").getValue().toString();
                    final String qid = postSnapshot.child("questionId").getValue().toString();
                    char[] c = input.toCharArray();
@@ -117,7 +116,7 @@ public class SearchFragment extends Fragment {
                Log.i(TAG, "onClick::" +search.getTitle());
 
                Intent intent = new Intent();
-               intent.setAction("android.intent.action.DETAILS");
+               intent.setAction("android.intent.action.ANSWER");
                intent.putExtra("qid",search.getQid());
                startActivity(intent);
            }

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="horizontal">
         <TextView
             android:id="@+id/detail_name"
             android:layout_width="wrap_content"
@@ -27,11 +27,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/post_question"
+        android:layout_width="match_parent"
+        android:layout_height="411dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context=".data.ui.search.SearchFragment"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="166dp">
+
         <Button
             android:id="@+id/ans_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Answer"
+            android:text="Submit"
             tools:layout_editor_absoluteX="161dp"
             tools:layout_editor_absoluteY="476dp" />
 

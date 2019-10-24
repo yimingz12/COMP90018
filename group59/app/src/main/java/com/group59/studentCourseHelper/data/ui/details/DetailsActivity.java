@@ -44,29 +44,25 @@ public class DetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         Intent intent = getIntent();
-        final String a = intent.getStringExtra("qid");
+        String a = intent.getStringExtra("title");
+//        answer.setText(a);
         showView(a);
-        Log.i(TAG, "onShow::"+a);
-        ans_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.ANSWER");
-                intent.putExtra("qid",a);
-                startActivity(intent);
-            }
-        });
 
     }
 
     private void showView(String a) {
-        myRef.child("8CMYneZckXOzjUMWQRKEoxDrmTF3").child(a).addValueEventListener(new ValueEventListener() {
+        myRef.child(a).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+<<<<<<< HEAD
                 name.setText(dataSnapshot.child("tag").getValue().toString());
                 title.setText(dataSnapshot.child("questionTitle").getValue().toString());
                 des.setText(dataSnapshot.child("questionDesc").getValue().toString());
+=======
+
+>>>>>>> parent of f386839... search
             }
 
             @Override
