@@ -28,6 +28,7 @@ public class AnswerActivity extends AppCompatActivity {
     Button ans_back;
     EditText answer;
     String name;
+    String qid;
     DatabaseReference myRef = database.getReference("answers");
     DatabaseReference userRef=database.getReference("users");
     FirebaseAuth mAuth=FirebaseAuth.getInstance();
@@ -51,6 +52,12 @@ public class AnswerActivity extends AppCompatActivity {
         answer = findViewById(R.id.answ);
         ans_back=(Button)findViewById(R.id.ans_back);
         ans_submit=(Button)findViewById(R.id.ans_submit);
+        Intent intent = getIntent();
+        String a = intent.getStringExtra("qid");
+        qid=a;
+        Log.i(TAG, "onAnswer: :"+qid);
+
+
         ans_submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -66,11 +73,7 @@ public class AnswerActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        String a = intent.getStringExtra("title");
-        Log.i(TAG, "onCreateView: :"+a);
-        answer.setText(a);
-        showView(a);
+
 
     }
 
@@ -80,7 +83,7 @@ public class AnswerActivity extends AppCompatActivity {
     private boolean addans(){
     String m_answer=answer.getText().toString().trim();
         String aid= myRef.push().getKey();
-        String qid="";//TODO: 改成从ld那边获得
+
         Answer m_ans=new Answer(m_answer,aid,qid,name);
         myRef.child(qid).child(aid).setValue(m_ans);
         Toast.makeText(this,"You have posted an answer succefully",Toast.LENGTH_LONG).show();

@@ -117,7 +117,7 @@ public class SearchFragment extends Fragment {
                Log.i(TAG, "onClick::" +search.getTitle());
 
                Intent intent = new Intent();
-               intent.setAction("android.intent.action.ANSWER");
+               intent.setAction("android.intent.action.DETAILS");
                intent.putExtra("qid",search.getQid());
                startActivity(intent);
            }

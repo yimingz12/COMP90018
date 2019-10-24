@@ -91,7 +91,7 @@ public class PostActivity extends AppCompatActivity {
             if(!TextUtils.isEmpty(m_title)){
                 String id= mDB_ref.push().getKey();
                 Question newques= new Question(id,m_title,m_desc,m_tag,name,mAuth.getUid());
-                mDB_ref.child(mAuth.getUid()).child(id).setValue(newques);
+                mDB_ref.child(id).setValue(newques);
                 Toast.makeText(this,"You have posted a question succefully",Toast.LENGTH_LONG).show();
                 return true;
             }else{
