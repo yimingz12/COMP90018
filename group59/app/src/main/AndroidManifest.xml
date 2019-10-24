@@ -12,21 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".data.AppIntroActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".data.ui.post.PostActivity"
+            android:value=".data.ui.post.PostActivity">
 
         </activity>
-        <activity
-            android:name=".data.ui.post.PostActivity"
-            android:value=".data.ui.post.PostActivity"></activity>
-        <activity
-            android:name=".data.ui.register.RegisterActivity"
+        <activity android:name=".data.ui.register.RegisterActivity"
             android:parentActivityName=".data.ui.login.LoginActivity">
-
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -41,6 +32,14 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".data.ui.details.DetailsActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.DETAILS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -49,7 +48,6 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.ANSWER" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
