@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        quit = root.findViewById(R.id.b_signout);
+        //quit = root.findViewById(R.id.b_signout);
         return root;
 /*
         quit.setOnClickListener(new View.OnClickListener() {
