@@ -45,7 +45,7 @@ public class PostActivity extends AppCompatActivity {
         mDB_ref=database.getReference("questions");
         mDB_user=database.getReference("users");
         mAuth=FirebaseAuth.getInstance();
-        mDB_user=mDB_user.child(mAuth.getUid());
+        mDB_user=mDB_user.child(mAuth.getCurrentUser().getUid());
         mDB_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -91,7 +91,7 @@ public class PostActivity extends AppCompatActivity {
             if(!TextUtils.isEmpty(m_title)){
                 String id= mDB_ref.push().getKey();
                 Question newques= new Question(id,m_title,m_desc,m_tag,name,mAuth.getUid());
-                mDB_ref.child(mAuth.getUid()).child(id).setValue(newques);
+                mDB_ref.child(id).setValue(newques);
                 Toast.makeText(this,"You have posted a question succefully",Toast.LENGTH_LONG).show();
                 return true;
             }else{

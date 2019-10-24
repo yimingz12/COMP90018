@@ -42,7 +42,7 @@ public class SearchFragment extends Fragment {
     DatabaseReference myRef = database.getReference("questions");
     List<Search> searchList;
 
-    private  ListView listView;
+    private ListView listView;
     TextView textView;
 
     private String TAG = getClass().getName();
@@ -52,7 +52,7 @@ public class SearchFragment extends Fragment {
         notificationsViewModel =
                 ViewModelProviders.of(this).get(SearchViewModel.class);
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        textView = view.findViewById(R.id.text_search);
+        textView = view.findViewById(R.id.search_input);
         searchList = new ArrayList();
         InputSearch = view.findViewById(R.id.search_input);
 
@@ -76,53 +76,54 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-   public void Event(){
+    public void Event() {
         searchList = new ArrayList();
-       final String input = InputSearch.getText().toString();
-       myRef.orderByChild("questionTitle").addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                   final String title = postSnapshot.child(("questionTitle")).getValue().toString();
-                   final String tag = postSnapshot.child("tag").getValue().toString();
-                   final String qid = postSnapshot.child("questionId").getValue().toString();
-                   char[] c = input.toCharArray();
-                   int j = 0;
-                   for(char cc:c) {
-                       if (title.indexOf(cc)>-1||tag.indexOf(cc)>-1) {
-                           j = 1;
-                       }
-                   }
-                   Log.i(TAG, "onSearch::" +j);
-                   if (j == 1){
-                       searchList.add(new Search(title, tag,qid));
-                   }
-               }
-           }
+        final String input = InputSearch.getText().toString();
+        myRef.child("8CMYneZckXOzjUMWQRKEoxDrmTF3").orderByChild("tag").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Log.i(TAG, "onSearch::" + postSnapshot.child("tag"));
+                    final String title = postSnapshot.child("quesionTitle").getValue().toString();
+                    final String tag = postSnapshot.child("tag").getValue().toString();
+                    final String qid = postSnapshot.child("questionId").getValue().toString();
+                    char[] c = input.toCharArray();
+                    int j = 0;
+                    for (char cc : c) {
+                        if (title.indexOf(cc) > -1 || tag.indexOf(cc) > -1) {
+                            j = 1;
+                        }
+                    }
+                    Log.i(TAG, "onSearch::" + j);
+                    if (j == 1) {
+                        searchList.add(new Search(title, tag, qid));
+                    }
+                }
+            }
 
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-           }
-       });
-       final SearchAdapter adapter = new SearchAdapter(getContext(), R.layout.search_list,searchList);
-       listView = getView().findViewById(R.id.search_list);
-       listView.setAdapter(adapter);
-       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               Search search = (Search) adapterView.getItemAtPosition(i);
-               Toast.makeText(getContext(),search.getTitle(),Toast.LENGTH_SHORT).show();
-               Log.i(TAG, "onClick::" +search.getTitle());
+            }
+        });
+        final SearchAdapter adapter = new SearchAdapter(getContext(), R.layout.search_list, searchList);
+        listView = getView().findViewById(R.id.search_list);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Search search = (Search) adapterView.getItemAtPosition(i);
+                Toast.makeText(getContext(), search.getTitle(), Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "onClick::" + search.getTitle());
 
-               Intent intent = new Intent();
-               intent.setAction("android.intent.action.ANSWER");
-               intent.putExtra("qid",search.getQid());
-               startActivity(intent);
-           }
-       });
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.DETAILS");
+                intent.putExtra("qid", search.getQid());
+                startActivity(intent);
+            }
+        });
 
-   }
+    }
 
     private void setContentView(int activity_register) {
     }
