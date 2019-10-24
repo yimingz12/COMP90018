@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class SearchFragment extends Fragment {
     List<Search> searchList;
 
     private ListView listView;
+    private ImageView image;
     TextView textView;
 
     private String TAG = getClass().getName();
@@ -108,6 +110,7 @@ public class SearchFragment extends Fragment {
         });
         final SearchAdapter adapter = new SearchAdapter(getContext(), R.layout.search_list, searchList);
         listView = getView().findViewById(R.id.search_list);
+        image = getView().findViewById(R.id.imageView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -115,6 +118,7 @@ public class SearchFragment extends Fragment {
                 Search search = (Search) adapterView.getItemAtPosition(i);
                 Toast.makeText(getContext(), search.getTitle(), Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "onClick::" + search.getTitle());
+                image.setVisibility(View.GONE);
 
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.DETAILS");
