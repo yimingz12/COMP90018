@@ -11,41 +11,46 @@
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="816dp">-->
 
-        <LinearLayout
-            android:id="@+id/post_question"
-            android:layout_width="match_parent"
-            android:layout_height="411dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            tools:context=".data.ui.search.SearchFragment"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="166dp">
+    <LinearLayout
+        android:id="@+id/post_question"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context=".data.ui.search.SearchFragment"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="166dp">
 
-            <EditText
-                android:id="@+id/answ"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Type your answer here"
-                android:inputType="textMultiLine"
-                tools:layout_editor_absoluteX="99dp"
-                tools:layout_editor_absoluteY="402dp" />
-            <Button
-                android:id="@+id/ans_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                tools:layout_editor_absoluteX="161dp"
-                tools:layout_editor_absoluteY="476dp" />
-            <Button
-                android:id="@+id/ans_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="go back" />
+        <EditText
+            android:id="@+id/answ"
+            android:layout_width="317dp"
+            android:layout_height="324dp"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Type your answer here"
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="402dp" />
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/ans_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_marginTop="100dp"
+            tools:layout_editor_absoluteX="161dp"
+            tools:layout_editor_absoluteY="476dp" />
+
+        <Button
+            android:id="@+id/ans_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="go back"
+            android:layout_marginTop="30dp"
+            />
+
+    </LinearLayout>
 <!--    </ListView>-->
 
 

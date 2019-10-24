@@ -63,15 +63,12 @@ public class HomeFragment extends Fragment {
         });
         quit = root.findViewById(R.id.b_signout);
         return root;
-        /*
+/*
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(Home.this, LoginActivity.class));
                 signOut();
-                finish();
-
 
             }
         });*/
