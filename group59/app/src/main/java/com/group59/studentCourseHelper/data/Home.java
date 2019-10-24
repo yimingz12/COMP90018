@@ -4,9 +4,8 @@ import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -15,11 +14,8 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.group59.studentCourseHelper.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group59.studentCourseHelper.data.ui.login.LoginActivity;
@@ -31,21 +27,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.ArrayList;
-
 public class Home extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference reference;
 
-
-    public static String name="2222 ";
-
-
-    User user1= new User();
     private FirebaseAuth mAuth;
     //ImageView profile;
-    Button quit;
+    //Button quit;
     //TextView name;
     ProgressBar loadingProgressBar;
 
@@ -58,65 +47,42 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        reference=database.getReference("users");
 
-
-
-
-        final TextView username = findViewById(R.id.tv_username);
+        //final TextView username = findViewById(R.id.tv_username);
         final ImageView profile = findViewById(R.id.iv_profile);
 
         loadingProgressBar = findViewById(R.id.loading);
 
         String a = getIntent().getStringExtra("key");
-        username.setText(a);
+        //username.setText(a);
 
-        quit= findViewById(R.id.b_signout);
+        //quit= findViewById(R.id.b_signout);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
-
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // sign in or changed
-//                   = user.getDisplayName();
-                     String email = user.getEmail();
-                    user.getUid();
+                    String name = user.getDisplayName();
+                    String email = user.getEmail();
+                    //Uri photoUri = user.getPhotoUrl();
 
-
-                   // Uri photoUri = user.getPhotoUrl();
-                    reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                            String a=dataSnapshot.child("name").getValue(String.class);
-//                            Log.i("tag","This is the name");
-//                            Log.i("Tag",a);
-//                            Home.name=a;
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                    Log.i("home name","this is the name00");
-                    Log.i("home name" ,Home.name);
                     // If the above were null, iterate the provider data
                     // and set with the first non null data
                     for (UserInfo userInfo : user.getProviderData()) {
-
-//                        if (name == null && userInfo.getDisplayName() != null) {
-//                            name = userInfo.getDisplayName();
-//                            System.out.println(name);
-//                        }
-//                        if (photoUri == null && userInfo.getPhotoUrl() != null) {
-//                            photoUri = userInfo.getPhotoUrl();
-//                        }
+                        if (name == null && userInfo.getDisplayName() != null) {
+                            name = userInfo.getDisplayName();
+                        }
+                        /*
+                        if (photoUri == null && userInfo.getPhotoUrl() != null) {
+                            photoUri = userInfo.getPhotoUrl();
+                        }*/
                     }
-                   // username.setText(name);
+                    //username.setText(name);
                     //profile.setImageURI(photoUri);
                 } else {
                     // sign out
@@ -124,7 +90,7 @@ public class Home extends AppCompatActivity {
             }
         };
 
-
+/*
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +102,7 @@ public class Home extends AppCompatActivity {
 
             }
         });
+        */
 /////////////////////////////////////////////////////////////////////
        /*
         FirebaseUser user = mAuth.getCurrentUser();
@@ -176,7 +143,7 @@ public class Home extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_award, R.id.navigation_post)
+                R.id.navigation_home, R.id.navigation_award,R.id.navigation_search, R.id.navigation_post)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
