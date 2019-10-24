@@ -4,7 +4,7 @@ import android.nfc.Tag;
 
 public class Question {
    private String questionId;
-    private String quesionTitle;
+    private String questionTitle;
     private String questionDesc;
     private String senderID;
     private String tag;
@@ -20,7 +20,7 @@ public class Question {
 
     public Question(String questionId, String quesionTitle, String questionDesc,String tag, String senderName,String senderID) {
         this.questionId = questionId;
-        this.quesionTitle = quesionTitle;
+        this.questionTitle = quesionTitle;
         this.questionDesc = questionDesc;
         this.senderID = senderID;
         this.tag = tag;
@@ -31,8 +31,8 @@ public class Question {
         return questionId;
     }
 
-    public String getQuesionTitle() {
-        return quesionTitle;
+    public String getQuestionTitle() {
+        return questionTitle;
     }
 
     public String getQuestionDesc() {

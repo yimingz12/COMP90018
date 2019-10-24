@@ -83,7 +83,7 @@ public class AnswerActivity extends AppCompatActivity {
     private boolean addans(){
     String m_answer=answer.getText().toString().trim();
         String aid= myRef.push().getKey();
-        String id= qid;
+
         Answer m_ans=new Answer(m_answer,aid,qid,name);
         myRef.child(qid).child(aid).setValue(m_ans);
         Toast.makeText(this,"You have posted an answer succefully",Toast.LENGTH_LONG).show();

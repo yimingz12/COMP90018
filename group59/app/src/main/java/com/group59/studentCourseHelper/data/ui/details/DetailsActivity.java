@@ -65,7 +65,7 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 name.setText(dataSnapshot.child("tag").getValue().toString());
-                title.setText(dataSnapshot.child("quesionTitle").getValue().toString());
+                title.setText(dataSnapshot.child("questionTitle").getValue().toString());
                 des.setText(dataSnapshot.child("questionDesc").getValue().toString());
             }
 
