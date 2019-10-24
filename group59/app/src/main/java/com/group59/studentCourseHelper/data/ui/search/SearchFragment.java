@@ -79,11 +79,12 @@ public class SearchFragment extends Fragment {
    public void Event(){
         searchList = new ArrayList();
        final String input = InputSearch.getText().toString();
-       myRef.orderByChild("questionTitle").addValueEventListener(new ValueEventListener() {
+       myRef.child("8CMYneZckXOzjUMWQRKEoxDrmTF3").orderByChild("tag").addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                   final String title = postSnapshot.child(("questionTitle")).getValue().toString();
+                   Log.i(TAG, "onSearch::" +postSnapshot.child("tag"));
+                   final String title = postSnapshot.child("quesionTitle").getValue().toString();
                    final String tag = postSnapshot.child("tag").getValue().toString();
                    final String qid = postSnapshot.child("questionId").getValue().toString();
                    char[] c = input.toCharArray();
