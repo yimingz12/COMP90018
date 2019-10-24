@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText email,name,password;
     ImageView profile;
     Button submit;
-    Uri imageUri;
+
     ProgressBar loadingProgressBar;
 
     @Override
@@ -52,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         email=findViewById(R.id.et_email);
         password=findViewById(R.id.et_password);
         name=findViewById(R.id.et_name);
-        profile=findViewById(R.id.iv_profile);
+
         submit=findViewById(R.id.b_register);
         loadingProgressBar = findViewById(R.id.loading);
 
@@ -64,21 +64,17 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                upload();
-            }
-        });
+
+
 
     }
-
+/*
     private void upload() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent, 10);
     }
-
+*/
     private boolean validateForm() {
         final boolean[] valid = {true};
 
@@ -210,30 +206,31 @@ public class RegisterActivity extends AppCompatActivity {
                     //final String uid=task.getResult().getUser().getUid();
                     final StorageReference storageReference= FirebaseStorage.getInstance().getReference().child("users").child(uid);
 
-                    storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+  //                  storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        //@Override
+  //                      public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                            if (task.isSuccessful()){
+ //                           if (task.isSuccessful()){
 
-                                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
 
-                                        String imageurl=uri.toString();
+                                        //String imageurl=uri.toString();
 
-                                        UserModel userModel=new UserModel();
-                                        userModel.name=name.getText().toString();
-                                        userModel.email=email.getText().toString();
-                                        userModel.password=password.getText().toString();
-                                        userModel.uid=uid;
-                                        userModel.imageurl=imageurl;
+                                        String m_name=name.getText().toString().trim();
+                                        String m_email=email.getText().toString().trim();
+                                        String m_password=password.getText().toString().trim();
+                                        String id=  FirebaseDatabase.getInstance().getReference().child("users").push().getKey();
+                                        UserModel userModel=new UserModel(m_name,m_email,m_password,id);
 
-                                        FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
+                                        //userModel.imageurl=imageurl;
+
+                                        FirebaseDatabase.getInstance().getReference().child("users").child(id).setValue(userModel);
 
 
                                         Intent intent = new Intent(RegisterActivity.this,Home.class);
-                                        intent.putExtra("key",userModel.name);   // String
+                                        intent.putExtra("key",userModel.getUserName());   // String
 
                                         startActivity(intent);
                                         finish();
@@ -241,15 +238,16 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 });
 
-                            }else{
-                                Toast.makeText(RegisterActivity.this,"error",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+
+                          //  }else{
+                      //          Toast.makeText(RegisterActivity.this,"error",Toast.LENGTH_SHORT).show();
+                  //          }
+               //         }
+              //      });
 
                 }else{
 
-                    Toast.makeText(RegisterActivity.this,"error",Toast.LENGTH_SHORT).show();
+        //            Toast.makeText(RegisterActivity.this,"error",Toast.LENGTH_SHORT).show();
 
                 }
                 loadingProgressBar.setVisibility(View.GONE);
@@ -257,7 +255,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -266,4 +264,6 @@ public class RegisterActivity extends AppCompatActivity {
             imageUri = data.getData();
         }
     }
+
+ */
 }

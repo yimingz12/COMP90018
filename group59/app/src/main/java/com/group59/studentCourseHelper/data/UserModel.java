@@ -2,16 +2,10 @@ package com.group59.studentCourseHelper.data;
 
 public class UserModel {
 
-        public String imageurl;
-        public String name;
-        public String email;
-        public String password;
-        public String uid;
-/*
+
         private String name;
         private String password;
         private String email;
-        private String imageurl;
         private String uid;
         //public int pwdresetFlag=0;
 
@@ -36,12 +30,6 @@ public class UserModel {
                 this.email = email;
         }
 
-        public String getImageId() {
-                return imageurl;
-        }
-        public void setImageId(String imageurl) {
-                this.imageurl = imageurl;
-        }
 
         public String getUID() {
                 return uid;
@@ -51,14 +39,13 @@ public class UserModel {
         }
 
 
-        public UserModel(String name, String password, String email, String imageurl, String uid) {
-                super();
+        public UserModel(String name, String password, String email,  String uid) {
+
                 this.name = name;
                 this.password = password;
                 this.email = email;
-                this.imageurl = imageurl;
+
                 this.uid = uid;
         }
-*/
 
 }
