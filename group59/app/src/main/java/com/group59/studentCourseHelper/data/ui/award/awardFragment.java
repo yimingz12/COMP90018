@@ -31,7 +31,7 @@ import java.util.List;
 public class awardFragment extends Fragment{
     private mylistViewModel notificationsViewModel;
     private ListView listView;
-    TextView textView;
+    //TextView textView;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     List<Question> myList = new ArrayList();
     DatabaseReference myRef = database.getReference("questions");
@@ -43,11 +43,11 @@ public class awardFragment extends Fragment{
         notificationsViewModel =
                 ViewModelProviders.of(this).get(mylistViewModel.class);
         final View view = inflater.inflate(R.layout.fragment_award, container, false);
-        textView = view.findViewById(R.id.myQ_hint);
+        //textView = view.findViewById(R.id.myQ_hint);
         notificationsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                //textView.setText(s);
             }
         });
         String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
