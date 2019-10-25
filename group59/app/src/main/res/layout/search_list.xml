@@ -10,8 +10,7 @@
     card_view:cardBackgroundColor="#00B82B2B"
     card_view:cardCornerRadius="4dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
@@ -19,11 +18,24 @@
         >
 
 
-        <TextView
-            android:id="@+id/question_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                card_view:srcCompat="@drawable/questionicon" />
+
+            <TextView
+                android:id="@+id/question_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/question_content"
