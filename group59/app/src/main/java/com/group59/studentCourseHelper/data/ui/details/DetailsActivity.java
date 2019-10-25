@@ -149,8 +149,8 @@ public class DetailsActivity extends AppCompatActivity implements SensorEventLis
     private void iniHolder() {
         Holder.scroll = (ScrollView) findViewById(R.id.sv_scroll);
         Holder.mlayout = (LinearLayout) findViewById(R.id.l_test);
-        Holder.tv_null = (TextView) findViewById(R.id.detail_des);
-        Holder.tv_null.setHeight(getWindowManager().getDefaultDisplay().getHeight() - 50);
+        //Holder.tv_null = (TextView) findViewById(R.id.detail_answer);
+        //Holder.tv_null.setHeight(getWindowManager().getDefaultDisplay().getHeight() - 50);
 
 
     }
@@ -180,6 +180,6 @@ public class DetailsActivity extends AppCompatActivity implements SensorEventLis
     static class Holder {
         static ScrollView scroll;
         static LinearLayout mlayout;
-        static TextView tv_null;
+        //static TextView tv_null;
     }
 }

@@ -30,7 +30,6 @@ public class HomeFragment extends Fragment {
     //private HomeViewModel homeViewModel;
     String email;
     String name;
-    private Button quit;
     private FirebaseAuth mAuth;
     DatabaseReference mDB_user;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -63,13 +62,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        quit = root.findViewById(R.id.b_signout);
-        quit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signOut();
-            }
-        });
+
         return root;
 
 
