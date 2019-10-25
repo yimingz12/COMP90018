@@ -73,6 +73,14 @@ public class DetailsActivity extends AppCompatActivity implements SensorEventLis
                 startActivity(intent);
             }
         });
+        //获取传感器管理器
+        sm = (SensorManager) getSystemService(SENSOR_SERVICE);
+
+        // 获取加速度传感器
+        mSensorOrientation = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        //注册数值变化监听器
+        sm.registerListener(this, mSensorOrientation,SensorManager.SENSOR_DELAY_UI);
         x=0;
         y=0;
         z=0;
