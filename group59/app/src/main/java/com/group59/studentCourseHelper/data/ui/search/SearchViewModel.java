@@ -24,7 +24,7 @@ public class SearchViewModel extends ViewModel {
 
     public SearchViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is search fragment");
+        mText.setValue("");
     }
 
     public LiveData<String> getText() {

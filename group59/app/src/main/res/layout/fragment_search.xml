@@ -34,8 +34,7 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-
-                android:hint="search_hint"
+                android:hint="Type class number to search"
                 android:inputType="text"
                 android:selectAllOnFocus="true" />
 
