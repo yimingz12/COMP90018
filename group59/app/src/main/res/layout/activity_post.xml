@@ -27,8 +27,8 @@
 
         <LinearLayout
             android:id="@+id/post_question"
-            android:layout_width="match_parent"
-            android:layout_height="411dp"
+            android:layout_width="305dp"
+            android:layout_height="634dp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             tools:context=".data.ui.search.SearchFragment"
@@ -36,10 +36,10 @@
             tools:layout_editor_absoluteY="166dp">
 
             <EditText
-                android:layout_marginTop="10dp"
                 android:id="@+id/ques_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:ems="10"
                 android:hint="title:"
                 android:inputType="textPersonName"
@@ -49,26 +49,28 @@
             <EditText
                 android:id="@+id/ques_desc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="106dp"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                android:gravity="start|top"
                 android:hint="description:"
                 android:inputType="textMultiLine"
                 tools:layout_editor_absoluteX="99dp"
                 tools:layout_editor_absoluteY="402dp" />
+
             <EditText
-                android:layout_marginTop="10dp"
                 android:id="@+id/ques_tag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Subject Code: e.g. COMP90018" />
+                android:hint="Subject Code: e.g. COMP90018"
+                android:inputType="textPersonName" />
+
             <Button
                 android:id="@+id/ques_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
                 android:text="Submit"
                 tools:layout_editor_absoluteX="161dp"
                 tools:layout_editor_absoluteY="476dp" />
@@ -77,6 +79,7 @@
                 android:id="@+id/ques_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="go back" />
 
 
