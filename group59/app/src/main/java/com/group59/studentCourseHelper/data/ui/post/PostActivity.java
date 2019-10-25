@@ -68,6 +68,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                if( addques()){
+                  //finish();
                   finish();
                };
 

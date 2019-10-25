@@ -4,6 +4,8 @@ import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -150,6 +152,48 @@ public class Home extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.action_logout_btn:
+                logOut();
+                return true;
+
+
+
+            default:
+                return false;
+
+
+        }
+
+    }
+
+    private void logOut() {
+
+
+        mAuth.signOut();
+        sendToLogin();
+    }
+
+    private void sendToLogin() {
+
+        Intent loginIntent = new Intent(Home.this, LoginActivity.class);
+        startActivity(loginIntent);
+        finish();
+
+    }
 
     @Override
     public void onStart() {
